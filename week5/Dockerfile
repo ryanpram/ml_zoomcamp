@@ -5,7 +5,7 @@ RUN pip install pipenv
 WORKDIR /app
 COPY ["Pipfile", "Pipfile.lock", "./"]
 
-# Install dependencies directly to the system instead of create virtualization
+# Install dependencies directly to the container instead of create virtualization inside the container
 RUN pipenv install --system --deploy
 
 COPY ["predict.py", "model_C=1.0.bin", "./"]
