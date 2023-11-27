@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-
+import tflite_runtime.interpreter as tflite
 from keras_image_helper import create_preprocessor
-import tensorflow.lite as tflite
 
 interpreter = tflite.Interpreter(model_path='clothing-model.tflite')
 interpreter.allocate_tensors()
@@ -40,7 +39,9 @@ def predict(url):
 
     preds = interpreter.get_tensor(output_index)
 
-    return dict(zip(classes,preds[0]))
+    float_predictions = preds[0].tolist()
+
+    return dict(zip(classes,float_predictions))
 
 
 
